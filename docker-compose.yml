@@ -1,0 +1,24 @@
+version: '2'
+services:
+  website:
+    build: .
+    ports:
+      - '3000:80'
+    volumes:
+      - .:/home/app/web:z
+    env_file:
+      - 'docker/env.web'
+#    depends_on:
+#      - postgres
+#    environment:
+#      POSTGRES_USER: 'postgres'
+#      POSTGRES_PASSWORD: 'password'
+#      DATABASE_TEST_URL: 'postgresql://postgres:password@postgres:5432/educloud_test?encoding=utf8&pool=5&timeout=5000'
+#  postgres:
+#    image: 'postgres:9.5'
+#    ports:
+#      - '5432:5432'
+#    volumes:
+#      - 'postgres:/var/lib/postgresql/data'
+volumes:
+  postgres:

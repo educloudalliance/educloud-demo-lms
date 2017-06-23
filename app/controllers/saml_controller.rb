@@ -23,23 +23,12 @@ class SamlController < ApplicationController
     if response.is_valid?
       session[:nameid] = response.nameid
       session[:attributes] = response.attributes
-      # @attrs = session[:attributes]
-      # logger.info 'Sucessfully logged'
-      # logger.info "NAMEID: #{response.nameid}"
-      # render :action => :index
-      # create_cart_when_login
       redirect_to pages_path
     else
-      # logger.info "Response Invalid. Errors: #{response.errors}"
       @errors = response.errors
       render action: :fail
     end
   end
-
-  # def create_cart_when_login
-  #   cart = ShoppingCart.create
-  #   session[:shopping_cart_id] = cart.id
-  # end
 
   def metadata
     settings = Account.get_saml_settings(url_base)
@@ -68,7 +57,6 @@ class SamlController < ApplicationController
     settings = Account.get_saml_settings(url_base)
 
     if settings.idp_slo_target_url.nil?
-      # logger.info 'SLO IdP Endpoint not found in settings, executing then a normal logout'
       reset_session
     else
 
@@ -76,7 +64,6 @@ class SamlController < ApplicationController
       # to compare it with the response we get back
       logout_request = OneLogin::RubySaml::Logoutrequest.new
       session[:transaction_id] = logout_request.uuid
-      # logger.info "New SP SLO for User ID: '#{session[:nameid]}', Transaction ID: '#{session[:transaction_id]}'"
 
       if settings.name_identifier_value.nil?
         settings.name_identifier_value = session[:nameid]
@@ -93,12 +80,11 @@ class SamlController < ApplicationController
     settings = Account.get_saml_settings(url_base)
     request_id = session[:transaction_id]
     logout_response = OneLogin::RubySaml::Logoutresponse.new(
-        params[:SAMLResponse],
-        settings,
-        matches_request_id: request_id,
-        get_params: params
+      params[:SAMLResponse],
+      settings,
+      matches_request_id: request_id,
+      get_params: params
     )
-    # logger.info "LogoutResponse is: #{logout_response.response}"
 
     validate_logout_response(logout_response)
   end
@@ -110,11 +96,8 @@ class SamlController < ApplicationController
       logger.error error_msg
       render inline: error_msg
     elsif logout_response.success?
-      # Actually log out this session
-      # logger.info "Delete session for '#{session[:nameid]}'"
       reset_session
     end
-    # render :action =>:index
   end
 
   # Method to handle IdP initiated logouts
@@ -123,19 +106,16 @@ class SamlController < ApplicationController
     logout_request = OneLogin::RubySaml::SloLogoutrequest.new(params[:SAMLRequest], settings: settings)
     unless logout_request.is_valid?
       error_msg = "IdP initiated LogoutRequest was not valid!. Errors: #{logout_request.errors}"
-      # logger.error error_msg
       render inline: error_msg
     end
-    # logger.info "IdP initiated Logout for #{logout_request.nameid}"
 
-    # Actually log out this session
     reset_session
 
     logout_response = OneLogin::RubySaml::SloLogoutresponse.new.create(
-        settings,
-        logout_request.id,
-        nil,
-        RelayState: params[:RelayState]
+      settings,
+      logout_request.id,
+      nil,
+      RelayState: params[:RelayState]
     )
     redirect_to logout_response
   end

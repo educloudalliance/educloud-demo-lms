@@ -1,7 +1,14 @@
-<div>
-  <%= debug session[:nameid] %>
-  <%= debug @response %>
+SAML response
+<div class="panel panel-default">
+  <div class="panel-body">
+    <% session[:attributes].each do |k, v| %>
+      <p><%= "#{k}: #{v[0]}" %></p>
+    <% end %>
+  </div>
 </div>
-<div>
-  <%= link_to 'browse', pages_browse_path, class: "btn btn-success" %>
+<div class="col-md-2 text-center">
+  <%= link_to 'lms/browse to get browse_url', pages_browse_path, class: "btn btn-success" %>
+</div>
+<div class="col-md-2 text-center">
+  <%= link_to 'lms/view to get token', pages_view_path, class: "btn btn-success" %>
 </div>

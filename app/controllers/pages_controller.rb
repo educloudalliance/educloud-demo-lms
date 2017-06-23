@@ -1,30 +1,35 @@
 class PagesController < ApplicationController
-  # require 'rest-client'
+  include PagesJson
+  before_action :access_token, only: %i[browse view]
+
   def index; end
 
   def browse
-    # @response = RestClient.get 'http://educloud.dev/api/v1/cms/materials', {accept: :json}
-    # puts @response.to_yaml
-    # base_url = 'http://google.com'
+    params = {
+      access_token: session[:token],
+      cancel_url: root_url,
+      add_resource_callback_url: pages_url
+    }
 
-    base_url = 'http://educloud.dev/api/v1/lms/browse'
+    response = HTTParty.post('http://educloud.dev/api/v1/lms/browse', saml_attributes_to_json(params))
 
-    # event = {'summary': 'Test RestClient event', 'start': {'dateTime': Time.now.strftime('%FT%T%z')}, 'end': {'dateTime': (Time.now + 3600).strftime('%FT%T%z')}}
-    #
-    # result = RestClient::Request.execute(method: :get, url: base_url)
-    # JSON.parse(result)
-    # begin
-    #   RestClient.get(base_url)
-    # rescue RestClient::Exception => err
-    #   puts err.response.body
-    # end
+    return if response_401?(response.headers['status'])
 
-    # begin
-    #   RestClient.get base_url
-    # rescue RestClient::ExceptionWithResponse => e
-    #   @response = e.response
-    # end
+    redirect_to(JSON.parse(response.body)['browse_url'])
+  end
 
-    @response = HTTParty.post(base_url)
+  def view
+    params = { access_token: session[:token] }
+    response = HTTParty.post('http://educloud.dev/api/v1/lms/view', saml_attributes_to_json(params))
+
+    @response = if response_401?(response.headers['status'])
+      response.headers['status']
+    else
+      JSON.parse(response.body)
+    end
+  end
+
+  def create
+    @response = JSON.parse params[:params]
   end
 end

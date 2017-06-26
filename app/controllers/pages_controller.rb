@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   include PagesJson
+
   before_action :access_token, only: %i[browse view]
 
   def index; end

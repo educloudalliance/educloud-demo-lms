@@ -23,7 +23,7 @@ class SamlController < ApplicationController
     if response.is_valid?
       session[:nameid] = response.nameid
       session[:attributes] = response.attributes
-      redirect_to pages_path
+      redirect_to lms_path
     else
       @errors = response.errors
       render action: :fail

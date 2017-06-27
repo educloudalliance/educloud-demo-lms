@@ -1,0 +1,30 @@
+sudo: required
+dist: trusty
+
+language: ruby
+rvm:
+  - 2.4.1
+
+cache: bundler
+
+env:
+  - SERVICE=rubocop
+  - SERVICE=brakeman
+  - SERVICE=bundle-audit
+
+before_script:
+  - uname -a
+  - ruby -v
+  - which ruby
+  - psql -c 'create database educloud_test;' -U postgres
+
+services:
+  - postgresql
+
+script:
+  - if [ $SERVICE == 'bundle-audit' ]; then
+    bundle exec bundle-audit update;
+    bundle exec bundle-audit check;
+    fi
+  - if [ $SERVICE == 'brakeman' ]; then bundle exec brakeman; fi
+  - if [ $SERVICE == 'rubocop' ]; then bundle exec rubocop; fi

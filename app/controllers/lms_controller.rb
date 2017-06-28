@@ -1,4 +1,14 @@
-module PagesJson
+class LmsController < ApplicationController
+  before_action :access_token, only: %i[index]
+
+  def index; end
+
+  def create
+    @response = JSON.parse params[:params]
+  end
+
+  private
+
   def access_token
     # http://educloud.dev/oauth/applications
     return if session[:token].present?
@@ -9,19 +19,5 @@ module PagesJson
     )
     access_token = client.password.get_token('carl@bazaar.com', '123456')
     session[:token] = access_token.token
-  end
-
-  def response_401?(status_str)
-    status_str.include? '401'
-  end
-
-  def saml_attributes_to_json(params)
-    session[:attributes].each { |k, v| params[k] = v[0] }
-    {
-      body: params.to_json,
-      headers: {
-        'Content-Type' => 'application/json'
-      }
-    }
   end
 end

@@ -1,0 +1,14 @@
+SAML response
+<div class="panel panel-default">
+  <div class="panel-body">
+    <% session[:attributes].each do |k, v| %>
+        <p><%= "#{k}: #{v[0]}" %></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="col-md-offset-4" >
+  <%= link_to 'lms/browse', browses_path, class: "btn btn-success" %>
+  <%= link_to 'lms/view', views_path, class: "btn btn-success" %>
+  <%= link_to 'logout', logout_saml_index_path, class: "btn btn-info" %>
+</div>

@@ -1,8 +1,16 @@
 <div class="row">
   <div class="col-md-12 text-center">
-    <%= @response.inspect %>
+    Response from Bazaar
+    <div class="panel panel-default">
+      <div class="panel-body">
+        view_url: <%= @response['view_url'] %>
+      </div>
+    </div>
   </div>
 </div>
 <div class="col-md-offset-4 margin-top-40">
   <%= link_to 'return to index', lms_path, class: "btn btn-success" %>
+<% if @response['view_url'].present? %>
+  <%= link_to 'to view_url', "#{@response['view_url']}&access_token=#{session[:token]}", class: "btn btn-primary" %>
+<% end %>
 </div>

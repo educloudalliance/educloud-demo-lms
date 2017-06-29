@@ -10,14 +10,13 @@ class LmsController < ApplicationController
   private
 
   def access_token
-    # http://educloud.dev/oauth/applications
     return if session[:token].present?
     client = OAuth2::Client.new(
-      'bafe385a120f17a23847d65d3651905cd471e7a398f2e38b1c42ab886c2d1583',
-      'c9cf1c4b64c8f8caac64b7b62b65b8bef78aa184826e18b595151f847af4f806',
-      site: 'http://localhost'
+      '06E777CD-1DC2-1CDA-6A8E-68B94E413201',
+      '825d81462ec90220f734af6c6bac5a0e88253d1fa83fb6daecd4f897968bfbdf',
+      site: 'https://bazaar.samposoftware.com/'
     )
-    access_token = client.password.get_token('carl@bazaar.com', '123456')
+    access_token = client.password.get_token('shaliko.usubov@samposoftware.com', '123456')
     session[:token] = access_token.token
   end
 end

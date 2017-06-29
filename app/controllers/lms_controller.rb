@@ -12,11 +12,12 @@ class LmsController < ApplicationController
   def access_token
     return if session[:token].present?
     client = OAuth2::Client.new(
-      '06E777CD-1DC2-1CDA-6A8E-68B94E413201',
-      '825d81462ec90220f734af6c6bac5a0e88253d1fa83fb6daecd4f897968bfbdf',
+      ENV['OAUTH_CLIENT_ID'],
+      ENV['OAUTH_CLIENT_SECRET'],
       site: 'https://bazaar.samposoftware.com/'
     )
-    access_token = client.password.get_token('shaliko.usubov@samposoftware.com', '123456')
+
+    access_token = client.password.get_token(ENV['BAZAAR_USER_EMAIL'], ENV['BAZAAR_USER_PASSWORD'])
     session[:token] = access_token.token
   end
 end

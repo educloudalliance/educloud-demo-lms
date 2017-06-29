@@ -6,9 +6,7 @@ class BrowsesController < ApplicationController
       add_resource_callback_url: lms_url
     }
 
-    response = HTTParty.post('http://educloud.dev/api/v1/lms/browse', saml_attributes_to_json(params))
-
-    return if response_401?(response.headers['status'])
+    response = HTTParty.post('https://bazaar.samposoftware.com/api/v1/lms/browse', saml_attributes_to_json(params))
 
     redirect_to(JSON.parse(response.body)['browse_url'])
   end

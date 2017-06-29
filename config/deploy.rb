@@ -2,7 +2,7 @@
 lock "3.8.2"
 
 set :application, "bazaar_lms"
-set :repo_url, "git@git.samposoftware.com:asenik/test_lms.git"
+set :repo_url, "git@github.com:educloudalliance/educloud-demo-lms.git"
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

@@ -1,6 +1,6 @@
 ## Quick start
 
-1. Populate the .env.development file :
+1. Create the .env.development file :
 
         OAUTH_CLIENT_ID=xxx
         OAUTH_CLIENT_SECRET=xxx
@@ -12,6 +12,7 @@
 Get IDP_CERT and IDP_SSO_TARGET_URL from you SAML IDP metadata;
 
 OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, BAZAAR_USER_EMAIL and BAZAAR_USER_PASSWORD from bazaar.educloudalliance.org 
+
 2. Start the web server:
 
         $ rails server

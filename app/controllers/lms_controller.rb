@@ -11,13 +11,12 @@ class LmsController < ApplicationController
 
   def access_token
     return if session[:token].present?
-    client = OAuth2::Client.new(
-      ENV['OAUTH_CLIENT_ID'],
-      ENV['OAUTH_CLIENT_SECRET'],
-      site: 'https://bazaar.samposoftware.com/'
-    )
+    response = RestClient.post 'https://bazaar.educloudalliance.org/oauth/token',
+      grant_type: 'client_credentials',
+      client_id: ENV['OAUTH_CLIENT_ID'],
+      client_secret: ENV['OAUTH_CLIENT_SECRET']
 
-    access_token = client.password.get_token(ENV['BAZAAR_USER_EMAIL'], ENV['BAZAAR_USER_PASSWORD'])
-    session[:token] = access_token.token
+    access_token = JSON.parse(response)['access_token']
+    session[:token] = access_token
   end
 end

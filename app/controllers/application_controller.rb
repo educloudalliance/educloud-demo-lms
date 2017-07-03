@@ -7,11 +7,6 @@ class ApplicationController < ActionController::Base
 
   def saml_attributes_to_json(params)
     session[:attributes].each { |k, v| params[k] = v[0] }
-    {
-      body: params.to_json,
-      headers: {
-        'Content-Type' => 'application/json'
-      }
-    }
+    params
   end
 end

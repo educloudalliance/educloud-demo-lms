@@ -7,9 +7,8 @@ end
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
-gem 'oauth2', '~> 1.4'
+gem 'restclient', '~> 0.14.4'
 
-gem 'httparty', '~> 0.15.5'
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
 
 gem 'ruby-saml', '~> 1.4.0'

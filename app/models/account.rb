@@ -17,7 +17,7 @@ class Account < ActiveRecord::Base
     # IdP section
     idp_section(settings)
 
-    settings.name_identifier_format = 'urn:oasis:names:tc:SAML:2.0:nameid-format:emailAddress'
+    # settings.name_identifier_format = 'urn:oasis:names:tc:SAML:2.0:nameid-format:emailAddress'
 
     # Security section
     settings.security[:authn_requests_signed] = true

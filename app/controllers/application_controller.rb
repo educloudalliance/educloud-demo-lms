@@ -6,7 +6,15 @@ class ApplicationController < ActionController::Base
   end
 
   def saml_attributes_to_json(params)
-    session[:attributes].each { |k, v| params[k] = v[0] }
+    template = {
+      'org:OID' => 'oid', 'org:role' => 'role', 'id:uid' => 'user_id',
+      'org:school' => 'school', 'id:school' => 'school_id',
+      'org:municipality' => 'city', 'id:municipalityCode' => 'city_id'
+    }
+    session[:attributes].each do |key, value|
+      splitkey = key.split('.').last
+      params[template[splitkey]] = value[0] if template.include? splitkey
+    end
     params
   end
 end

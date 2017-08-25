@@ -1,6 +1,30 @@
-<div class="col-md-2 col-md-offset-4 margin-top-40">
-  <form class="form-signin">
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <%= link_to "SAML Login", sso_saml_index_path, class: "btn btn-primary btn-block" %>
-  </form>
+<div class="wrapper">
+  <div class="row padding-top-80">
+    <div class="col-md-12 text-center margin-top-20">
+      <h4>This is a demo LMS to present functionalitys of Educloud Alliance.</h4>
+
+    </div>
+  </div>
+  <div class="row margin-top-40">
+    <div class="sign-in-form center-block text-center">
+      <form class="form-signin">
+        <h3 class="form-signin-heading">Please sign in</h3>
+        <%= link_to "MPASS-test login", sso_saml_index_path, class: "btn btn-primary btn-block" %>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class=" text-center">
+      <nav class="navbar navbar-default navbar-fixed-bottom link-container">
+        <div class="container margin-top-10">
+          <a href="https://github.com/educloudalliance/educloud-demo-lms" target="_blank" title="Source code">
+            <%= image_tag asset_path('github_logo.png') %>
+          </a>
+          <a href="https://educloudalliance.apinf.io" target="_blank" title="EduCloud Alliance">
+            <%= image_tag asset_path('educloud_apinf.png') %>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
 </div>

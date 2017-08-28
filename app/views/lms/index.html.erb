@@ -1,4 +1,6 @@
-SAML response
+<div class="col-md-4 clearfloat center-block">
+  <h5>response from SAML IDP provider (MPASS-test)</h5>
+</div>
 <div class="panel panel-default">
   <div class="panel-body">
     <% session[:attributes].each do |k, v| %>
@@ -6,9 +8,10 @@ SAML response
     <% end %>
   </div>
 </div>
-
-<div class="col-md-offset-4" >
-  <%= link_to 'lms/browse', browses_path, class: "btn btn-success" %>
-  <%= link_to 'lms/view', views_path, class: "btn btn-success" %>
-  <%= link_to 'logout', logout_saml_index_path, class: "btn btn-info" %>
+<div class="row">
+  <div class="center-block col-md-4 text-center clearfloat">
+    <%= link_to 'lms/browse', browses_path, class: "btn btn-success" %>
+    <%= link_to 'lms/view', views_path, class: "btn btn-success" %>
+    <%= link_to 'logout', logout_saml_index_path, class: "btn btn-info" %>
+  </div>
 </div>

@@ -1,6 +1,16 @@
-<div class="col-md-2 col-md-offset-4 margin-top-40">
-  <form class="form-signin">
-    <h2 class="form-signin-heading">Logged out</h2>
-    <%= link_to "Login", sso_saml_index_path, class: "btn btn-primary btn-block" %>
-  </form>
+<div>
+  <div class="row padding-top-80">
+    <div class="col-md-12 text-center margin-top-20">
+      <h4>This is a demo LMS to present functionalitys of Educloud Alliance.</h4>
+    </div>
+  </div>
+  <div class="row margin-top-40">
+    <div class="sign-in-form center-block text-center">
+      <h5 class="">You successfully logged out.</h5>
+      <form class="form-signin">
+        <h3 class="form-signin-heading">Please sign in</h3>
+        <%= link_to "MPASS-test login", sso_saml_index_path, class: "btn btn-primary btn-block" %>
+      </form>
+    </div>
+  </div>
 </div>

@@ -26,5 +26,5 @@ script:
     bundle exec bundle-audit update;
     bundle exec bundle-audit check;
     fi
-  - if [ $SERVICE == 'brakeman' ]; then bundle exec brakeman; fi
+  - if [ $SERVICE == 'brakeman' ]; then bundle exec brakeman --skip-files app/controllers/saml_controller.rb -z --ensure-latest; fi
   - if [ $SERVICE == 'rubocop' ]; then bundle exec rubocop; fi

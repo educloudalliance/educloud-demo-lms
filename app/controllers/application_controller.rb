@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :exception, only: :index
 
   def response_401?(status_str)
     status_str.include? '401'

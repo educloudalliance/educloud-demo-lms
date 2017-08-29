@@ -1,4 +1,5 @@
 class LmsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :access_token, only: %i[index]
 
   def index; end

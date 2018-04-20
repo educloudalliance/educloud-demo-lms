@@ -7,7 +7,7 @@ end
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
-gem 'pg'
+gem 'pg', '~> 0.18'
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
 
 gem 'ruby-saml', '~> 1.4.0'

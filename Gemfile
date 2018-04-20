@@ -7,7 +7,6 @@ end
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
-gem 'restclient', '~> 0.14.4'
 
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
 
